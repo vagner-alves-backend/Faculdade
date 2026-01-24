@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jokenpo</title>
+</head>
+    <style>
+        * {
+            margin: 0;
+        }
+
+        #conteiner {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            border: 2px solid black;
+
+            margin: auto;
+            margin-top: 80px;
+        }
+
+        header {
+            text-align: center;
+            padding: 10px;
+            border-bottom: 2px solid black;
+
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        #placar {
+            position: absolute;
+            right: 1px;
+            top: 1px;
+            width: 100px;
+            height: 55px;
+            
+            border-left: 3px solid black;
+
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        #pc {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+
+            top: 130px;
+            left: 200px;
+        }
+
+        #img_pc {
+            width: 100px;
+        }
+
+        #jogador {
+            position: absolute;
+            width: 100px;
+
+            top: 130px;
+            left: 100px;
+
+            display: none;
+    
+        }
+
+        #jogador > img {
+            width: 90px;
+            transform: rotate(30deg);
+        }
+
+        .escolhas {
+            display: inline-block;
+            border: 1px solid black;
+
+            padding: 5px;
+        } 
+
+        #escolha_pedra {
+            position: absolute;
+
+            bottom: 120px;
+            left: 30px;
+        }
+
+        #escolha_papel {
+            position: absolute;
+
+            bottom: 120px;
+            left: 210px;
+
+        }
+
+        #escolha_tesoura {
+            position: absolute;
+
+            bottom: 120px;
+            right: 30px;
+        }
+
+        #jogar_ {
+            position: absolute;
+            bottom: 40px;
+            left: 120px;
+
+            width: 90px;
+            height: 35px;
+
+            border-radius:10px;
+            border: 1px solid white;
+            box-shadow: 3px 2px 10px 2px rgba(0, 0, 0, 0.162);
+
+            background-color: rgb(8, 208, 8);
+            color: white;
+        }
+
+        #reset_ {
+            position: absolute;
+            bottom: 40px;
+            right: 120px;
+
+            width: 90px;
+            height: 35px;
+
+            border-radius:10px;
+            border: 1px solid white;
+            box-shadow: 3px 2px 10px 2px rgba(0, 0, 0, 0.162);
+
+            background-color: rgb(242, 84, 17);
+            color: white;
+        }
+
+    </style>
+<body>
+    <div id="conteiner">
+        <header>
+            <h1>Jokenpo</h1>
+        </header>
+
+        <main>
+
+            <div id="arena">
+                <div id="placar">
+                    <p id="placar_pc">Pc: 0</p>
+                    <p id="placar_jogador">p1: 0</p>
+                    <p id="empate">emp: 0</p>
+                </div>
+                <div id="jogador">
+                    <img src="./jokenpo_img/papel.png" alt="papel" id="img_jogador">
+                </div>
+                <div id="pc">
+                    <img src="./jokenpo_img/pc.png" alt="pc" id="img_pc">
+                </div>
+            </div>
+
+            <div id="jogada">
+                
+                <form name="jokenpo">
+                    <p onclick="pedra()" id="escolha_pedra" class="escolhas">
+                        <img src="./jokenpo_img/pedra.png" alt="pedra">
+                    </p>
+                    
+                    <p onclick="papel()" id="escolha_papel" class="escolhas">
+                        <img src="./jokenpo_img/papel.png" alt="papel">
+                    </p>
+                   
+                    <p onclick="tesoura()" id="escolha_tesoura" class="escolhas">
+                        <img src="./jokenpo_img/tesoura.png" alt="tesoura">
+                    </p>
+                    
+                </form>
+
+                <input type="button" value="jogar" onclick="jogar()" id="jogar_">
+                <input type="button" value="resetar" onclick="reset()" id="reset_">
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        const pc = document.getElementById("pc");
+        var img_pc = document.getElementById("img_pc");
+
+        const jogador = document.getElementById("jogador");
+        var img_jogador = document.getElementById("img_jogador");
+
+        const pedra_ = document.getElementById("escolha_pedra");
+        const papel_ = document.getElementById("escolha_papel");
+        const tesoura_ = document.getElementById("escolha_tesoura");
+
+
+        const jg_placar = document.getElementById("placar_jogador");
+        const pc_placar = document.getElementById("placar_pc");
+        const empate = document.getElementById("empate");
+    
+        var jogada = 0;
+        var jogador_ganhou = 0;
+        var pc_ganhou = 0;
+        var empatou = 0;
+        
+        function jogar() { 
+            if (jogada != 0) {
+                pc.style.left = "300px";
+                jogador.style.display = "block";
+
+                //pc
+                var pc_jogou = Math.floor(Math.random() * 3);
+                switch (pc_jogou) {
+                    case 0:
+                        img_pc.src = "./jokenpo_img/pcpedra.png";
+                        break;
+                    case 1:
+                        img_pc.src = "./jokenpo_img/pcpapel.png";
+                        break;
+                    case 2:
+                        img_pc.src = "./jokenpo_img/pctesoura.png";
+                        break;
+                }
+            }
+
+            
+
+
+            //jogador
+            switch (jogada) {
+                case 1: 
+                    img_jogador.src = "./jokenpo_img/pedra.png";
+                    break;
+                case 2: 
+                    img_jogador.src = "./jokenpo_img/papel.png"
+                    break;
+                case 3: 
+                    img_jogador.src = "./jokenpo_img/tesoura.png";
+                    break;
+                default: 
+                    alert("Escolha um movimento");
+                    break;
+            }
+
+            //venceu
+            if (jogada == 1 && pc_jogou == 0 || jogada == 2 && pc_jogou == 1 || jogada == 3 && pc_jogou == 2) {
+                empatou++;
+                empate.innerHTML = `emp: ${empatou}`;
+            } else if (jogada == 1 && pc_jogou == 2 || jogada == 2  && pc_jogou == 0 || jogada == 3 && pc_jogou == 1) {
+                jogador_ganhou++;
+                jg_placar.innerHTML = `p1: ${jogador_ganhou}`;
+            } else if (jogada == 3 && pc_jogou == 0 || jogada == 1  && pc_jogou == 1 || jogada == 2 && pc_jogou == 2) {
+                pc_ganhou++;
+                pc_placar.innerHTML = `pc: ${pc_ganhou}`;
+            }
+
+            jogada = 0;
+            pedra_.style.border = "1px solid black";
+            papel_.style.border = "1px solid black";
+            tesoura_.style.border = "1px solid black";
+        }
+
+        function reset() {
+            pedra_.style.border = "1px solid black";
+            papel_.style.border = "1px solid black";
+            tesoura_.style.border = "1px solid black";
+
+            jg_placar.innerHTML = "p1: 0";
+            pc_placar.innerHTML = "pc: 0";
+            empate.innerHTML = "emp: 0";
+
+            img_pc.src = "./jokenpo_img/pc.png";
+
+            pc.style.left = "200px";
+            jogador.style.display = "none";
+        }
+
+        function pedra() {
+            pedra_.style.border = "5px solid yellow";
+            papel_.style.border = "1px solid black";
+            tesoura_.style.border = "1px solid black";
+            jogada = 1;
+        }
+        function papel() {
+            pedra_.style.border = "1px solid black";
+            papel_.style.border = "5px solid yellow";
+            tesoura_.style.border = "1px solid black";
+            jogada = 2;
+        }
+        function tesoura() {
+            pedra_.style.border = "1px solid black";
+            papel_.style.border = "1px solid black";
+            tesoura_.style.border = "5px solid yellow";
+            jogada = 3;
+        }
+
+
+    </script>
+</body>
+</html>

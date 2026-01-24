@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabuada</title>
+
+    <style>
+        main {
+            width: 400px;
+            height: 450px;
+            border-radius: 0 15px 0 0px;
+            box-shadow: 1px 2px 3px 0 rgba(0, 0, 0, 0.304);
+            font-family: cursive;
+
+            margin: auto;
+            margin-top: 80px;
+        }
+
+        header {
+            background-color: rgb(21, 233, 21);
+            text-align: center;
+            color: white;
+            border-radius: 0 15px 0 0;
+            height: 50px;
+        }
+
+        #inform {
+            display: inline-block;
+            padding-left: 10px;
+        }
+
+        #list {
+            display: block;
+            width: 150px;
+            margin-left: 240px;
+            margin-top: 10px; 
+            
+            font-family: cursive;
+            font-size: 1em;
+            text-align: center;
+        }
+
+    </style>
+
+</head>
+<body>
+    <main id="estrutura">
+        <header>
+            <h1>Tabuada</h1>
+        </header>
+        <section>
+            <div id="inform">
+                <p>Digite um número entre 1 e 10: </p>
+                <input type="number" name="num" id="num">
+                <input type="button" value="calcular" id="calc">
+            </div>
+            <select name="list" size="10" id="list">
+                <option value="cont">0 x 0 = 0</option>
+            </select>
+        </section>
+    </main>
+
+    <script>
+        const calcular = document.getElementById("calc");
+        calcular.addEventListener('click', ()=>{
+
+            const numero = document.getElementById("num");
+            const n = Number(numero.value);
+
+            if (n < 1 || n > 10) {
+                alert ('[ERRO]: Número invalido, informe um numero valido..');
+            } else {
+                const list = document.getElementById("list");
+                list.innerHTML = ' ';
+                let res = 0;
+                
+                for (let i = 1; i <= 10; i++) {
+                    res = n * i;
+                    let op = document.createElement('option');
+                    op.innerHTML += `${n} x ${i} = ${res}`;
+                    list.appendChild(op);
+                }
+            }
+        });
+     </script>
+</body>
+</html>
