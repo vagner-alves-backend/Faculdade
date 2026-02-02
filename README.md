@@ -1,6 +1,6 @@
 # 👨🏽‍🎓 Faculdade
 
-### 1°Semestre
+### 📚 1°Semestre
   - Algoritmos e tecnicas de programação
   - Algoritmos e estrutura de dados
   - Lógica e matemática computacional
